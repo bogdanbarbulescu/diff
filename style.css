@@ -1,0 +1,377 @@
+:root {
+    /* Base Theme */
+    --bg-color: #1e1e1e;
+    --text-color: #d4d4d4;
+    --header-color: #cccccc;
+    --border-color: #444444;
+    --input-bg: #2a2a2a;
+    --textarea-bg: #252526;
+    --button-bg: #007acc;
+    --button-hover-bg: #005fa3;
+    --button-text: #ffffff;
+    --pre-bg: #252526;
+    --error-color: #f48771;
+    --status-color: #cccccc;
+
+    /* Drag & Drop Feedback */
+    --drop-zone-border: 2px dashed #555555;
+    --drop-zone-over-border: 2px dashed var(--button-bg);
+    --drop-zone-over-bg: rgba(0, 122, 204, 0.1);
+
+    /* High Contrast Diff Colors */
+    --diff-add-bg: rgba(70, 150, 70, 0.45);  /* Slightly brighter/more opaque green bg */
+    --diff-add-text: #b0ffb0;              /* Bright green text color */
+    --diff-del-bg: rgba(170, 70, 70, 0.5);   /* Slightly brighter/more opaque red bg */
+    --diff-del-text: #ffb0b0;              /* Bright red text color */
+    --diff-equal-color: #909090;           /* Make unchanged slightly dimmer */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--input-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2, h3 {
+    color: var(--header-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+h3 {
+    font-size: 1.1em;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.instructions {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    color: var(--status-color);
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.file-input-container {
+    flex: 1;
+    min-width: 300px;
+    padding: 15px;
+    border: var(--drop-zone-border); /* Default drop zone border */
+    border-radius: 5px;
+    background-color: var(--bg-color); /* Slightly different background */
+    transition: border-color 0.2s ease, background-color 0.2s ease; /* Smooth transition for drag over */
+}
+
+/* Drag over effect */
+.file-input-container.drag-over {
+    border-color: var(--drop-zone-over-border);
+    background-color: var(--drop-zone-over-bg);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--header-color);
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    background-color: var(--textarea-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.9em;
+    line-height: 1.5; /* Improve readability in textarea */
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 150px; /* Ensure a minimum usable height */
+    margin-bottom: 15px; /* Space before browse button */
+}
+
+textarea::placeholder {
+    color: #777;
+    font-style: italic;
+}
+
+/* Fallback File Input Styling */
+.file-browse-label {
+    display: inline-block; /* Keep it inline with the button */
+    margin-bottom: 0; /* Reset margin */
+    margin-right: 10px; /* Space before input */
+    font-weight: normal; /* Less prominent than main label */
+    font-size: 0.9em;
+}
+
+.file-input-fallback {
+    display: inline-block; /* Make it inline */
+    width: auto; /* Don't force full width */
+    padding: 5px 8px; /* Smaller padding */
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg); /* Match container bg */
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.file-input-fallback::file-selector-button {
+    background-color: #444; /* Darker button */
+    color: var(--button-text);
+    border: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-right: 5px; /* Space between button and text */
+}
+
+.file-input-fallback::file-selector-button:hover {
+    background-color: #555;
+}
+
+/* Feedback for drag/drop */
+.drop-feedback {
+    display: block;
+    font-size: 0.85em;
+    color: var(--status-color);
+    min-height: 1.4em; /* Reserve space */
+    margin-top: 5px;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex; /* Align buttons */
+    justify-content: center;
+    gap: 15px; /* Space between buttons */
+    flex-wrap: wrap; /* Wrap if needed */
+}
+
+button {
+    padding: 12px 25px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+button:active {
+     transform: scale(0.98);
+}
+
+button#clearBtn {
+    background-color: #6c757d; /* Grey color for clear */
+}
+button#clearBtn:hover {
+    background-color: #5a6268;
+}
+
+.status-message {
+    /* Make status message span full width below buttons */
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    min-height: 1.6em; /* Prevent layout shift */
+    color: var(--status-color);
+    order: 3; /* Ensure it appears below buttons in flex layout */
+}
+
+.status-message.error {
+    color: var(--error-color);
+    font-weight: bold;
+}
+
+.results-section {
+    display: none; /* Initially hidden */
+}
+
+.diff-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.diff-output {
+    flex: 1;
+    min-width: 300px;
+}
+
+pre {
+    background-color: var(--pre-bg);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    white-space: pre-wrap; /* Wrap lines but preserve structure */
+    word-wrap: break-word; /* Break long words if necessary */
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.9em;
+    line-height: 1.5; /* Match textarea line height */
+    min-height: 200px;
+    max-height: 60vh; /* Limit height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* ---- HIGH CONTRAST Diff highlighting styles ---- */
+.diff-add {
+    background-color: var(--diff-add-bg);
+    color: var(--diff-add-text);           /* Bright text */
+    text-decoration: none;                 /* Ensure no underlines */
+    border-radius: 2px;                    /* Optional: slightly rounded corners */
+    /* padding: 0 1px; */                 /* Optional: tiny horizontal padding */
+}
+
+.diff-del {
+    background-color: var(--diff-del-bg);
+    color: var(--diff-del-text);           /* Bright text */
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;       /* Make strikethrough slightly thinner */
+    text-decoration-color: var(--diff-del-text); /* Match strikethrough color */
+    border-radius: 2px;                    /* Optional: slightly rounded corners */
+     /* padding: 0 1px; */                /* Optional: tiny horizontal padding */
+}
+
+.diff-equal {
+     color: var(--diff-equal-color);       /* Use dimmed grey */
+     background-color: transparent;        /* No background for unchanged */
+     text-decoration: none;
+}
+
+
+/* ---- HIGH CONTRAST Legend Styling ---- */
+.diff-legend {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.diff-legend-item {
+    margin: 0 15px;
+    display: inline-flex; /* Align marker and text */
+    align-items: center; /* Vertically center */
+}
+
+.diff-legend-item .marker {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    border-radius: 3px;
+    vertical-align: middle; /* Align with text */
+    position: relative; /* Needed for ::after pseudo-elements */
+    border: 1px solid rgba(204, 204, 204, 0.2); /* Subtle border for all markers */
+}
+
+/* Legend marker for Added text */
+.diff-legend-item .marker.diff-add {
+    background-color: var(--diff-add-bg);
+    border-color: rgba(176, 255, 176, 0.5); /* Border matching text */
+}
+.diff-legend-item .marker.diff-add::after {
+     content: 'A';
+     position: absolute;
+     top: -1px; /* Adjust alignment */
+     left: 3px;
+     font-size: 10px;
+     font-weight: bold;
+     color: var(--diff-add-text);
+     line-height: 14px;
+}
+
+/* Legend marker for Deleted text */
+.diff-legend-item .marker.diff-del {
+    background-color: var(--diff-del-bg);
+    border-color: rgba(255, 176, 176, 0.6); /* Border matching text */
+}
+.diff-legend-item .marker.diff-del::before { /* Use ::before to avoid conflict with potential ::after for strikethrough */
+    content: 'D';
+     position: absolute;
+     top: -1px; /* Adjust alignment */
+     left: 3px;
+     font-size: 10px;
+     font-weight: bold;
+     color: var(--diff-del-text);
+     line-height: 14px;
+     text-decoration: line-through;
+     text-decoration-color: var(--diff-del-text);
+     text-decoration-thickness: 1px;
+}
+
+/* Legend marker for Equal text */
+.diff-legend-item .marker.diff-equal {
+    background-color: transparent; /* Match actual equal style */
+    border: 1px solid var(--diff-equal-color);
+}
+.diff-legend-item .marker.diff-equal::after {
+     content: '=';
+     position: absolute;
+     top: -2px; /* Adjust alignment */
+     left: 3px;
+     font-size: 10px;
+     font-weight: bold;
+     color: var(--diff-equal-color);
+     line-height: 14px;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .input-section, .diff-container {
+        flex-direction: column; /* Stack vertically on smaller screens */
+    }
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+}
