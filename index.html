@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Difference Finder (Paste/Drop)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Load diff-match-patch library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Difference Finder</h1>
+        <p class="instructions">Paste text directly, drop a text file onto an area below, or use the 'Browse' button.</p>
+
+        <div class="input-section">
+            <!-- Input Area 1 -->
+            <div class="file-input-container drop-zone" id="drop-zone-1">
+                <label for="text-input-1">Text Area 1 / Drop Zone 1:</label>
+                <textarea id="text-input-1" rows="10" placeholder="Paste text for File 1 here or drop a file..."></textarea>
+                <label for="file1" class="file-browse-label">Or Browse:</label>
+                <input type="file" id="file1" class="file-input-fallback" accept=".txt, .text, .log, .csv, .md, .html, .css, .js, .json, .xml, .yaml, .ini">
+                <span class="drop-feedback" id="drop-feedback-1"></span>
+            </div>
+
+            <!-- Input Area 2 -->
+            <div class="file-input-container drop-zone" id="drop-zone-2">
+                 <label for="text-input-2">Text Area 2 / Drop Zone 2:</label>
+                 <textarea id="text-input-2" rows="10" placeholder="Paste text for File 2 here or drop a file..."></textarea>
+                 <label for="file2" class="file-browse-label">Or Browse:</label>
+                <input type="file" id="file2" class="file-input-fallback" accept=".txt, .text, .log, .csv, .md, .html, .css, .js, .json, .xml, .yaml, .ini">
+                <span class="drop-feedback" id="drop-feedback-2"></span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="compareBtn">Compare Text</button>
+             <button id="clearBtn" type="button">Clear All</button>
+            <p id="status" class="status-message" aria-live="polite"></p>
+        </div>
+
+        <div class="results-section" id="results">
+            <h2>Differences</h2>
+            <div class="diff-container">
+                <div class="diff-output">
+                    <h3>Differences in Text Area 1</h3>
+                    <pre id="diff-output-1"></pre>
+                </div>
+                <div class="diff-output">
+                    <h3>Differences in Text Area 2</h3>
+                     <pre id="diff-output-2"></pre>
+                </div>
+            </div>
+             <div class="diff-legend">
+                <span class="diff-legend-item"><span class="marker diff-add"></span> Added Text</span>
+                <span class="diff-legend-item"><span class="marker diff-del"></span> Deleted Text</span>
+                <span class="diff-legend-item"><span class="marker diff-equal"></span> Unchanged Text</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
